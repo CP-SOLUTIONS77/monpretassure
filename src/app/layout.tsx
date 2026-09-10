@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     siteName: "Mon Prêt Assuré",
   },
   verification: {
-    google: "Aij0Qq4XkF_f9HhILhP-LYfWDkdTDui_HhA5iclGavY",
+    google: "7sBzQFfNSONoMmSpZEAiO_M4UKPBg2UfNk63nQme1-s",
   },
 };
 
