@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { TrackOnView } from "@/components/TrackingEvents";
 
 export const metadata: Metadata = {
   title: "Comparer mon assurance emprunteur",
