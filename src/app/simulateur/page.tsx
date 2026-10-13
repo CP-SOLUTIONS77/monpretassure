@@ -12,6 +12,7 @@ const SIMULATEUR_URL = "https://cp-solutions.assurdistribution.fr/";
 export default function SimulateurPage() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-16">
+      <TrackOnView event="simulateur_ouvert" />
       <h1 className="font-heading text-3xl font-semibold text-navy sm:text-4xl">
         Comparer mon assurance emprunteur
       </h1>
