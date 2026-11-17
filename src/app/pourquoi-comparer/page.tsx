@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Pourquoi comparer son assurance emprunteur",
   description:
     "L'assurance de la banque n'est pas obligatoire. La délégation d'assurance permet souvent d'économiser plusieurs milliers d'euros sur la durée du prêt.",
+  alternates: { canonical: "/pourquoi-comparer" },
 };
 
 export default function PourquoiComparerPage() {

@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Comparer mon assurance emprunteur",
   description:
     "Comparez gratuitement les offres d'assurance emprunteur du marché, à garanties équivalentes à celles exigées par votre banque.",
+  alternates: { canonical: "/simulateur" },
 };
 
 const SIMULATEUR_URL = "https://cp-solutions.assurdistribution.fr/";
