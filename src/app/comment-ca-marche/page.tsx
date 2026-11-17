@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Comment ça marche",
   description:
     "Les étapes pour comparer ou changer d'assurance emprunteur : envoi des documents, comparaison, vérification d'équivalence, réponse de la banque.",
+  alternates: { canonical: "/comment-ca-marche" },
 };
 
 const STEPS = [
