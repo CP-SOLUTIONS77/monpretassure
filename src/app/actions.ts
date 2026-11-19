@@ -89,3 +89,70 @@ export async function submitLead(
     message: "Merci ! Votre demande a bien été enregistrée, on vous rappelle rapidement.",
   };
 }
+
+const callbackSchema = z.object({
+  firstname: z.string().trim().min(1, "Le prénom est requis."),
+  email: z.string().trim().email("Adresse e-mail invalide."),
+  phone: z
+    .string()
+    .trim()
+    .min(10, "Numéro de téléphone invalide.")
+    .max(20, "Numéro de téléphone invalide."),
+  source: z.string().trim().min(1),
+});
+
+export type CallbackState = {
+  status: "idle" | "success" | "error";
+  message: string;
+  fieldErrors?: Partial<Record<keyof z.infer<typeof callbackSchema>, string>>;
+};
+
+export async function submitCallback(
+  _prevState: CallbackState,
+  formData: FormData,
+): Promise<CallbackState> {
+  const parsed = callbackSchema.safeParse({
+    firstname: formData.get("firstname"),
+    email: formData.get("email"),
+    phone: formData.get("phone"),
+    source: formData.get("source"),
+  });
+
+  if (!parsed.success) {
+    const fieldErrors: CallbackState["fieldErrors"] = {};
+    for (const issue of parsed.error.issues) {
+      const key = issue.path[0] as keyof z.infer<typeof callbackSchema>;
+      fieldErrors[key] = issue.message;
+    }
+    return {
+      status: "error",
+      message: "Merci de corriger les champs indiqués.",
+      fieldErrors,
+    };
+  }
+
+  const { firstname, email, phone, source } = parsed.data;
+
+  try {
+    await createBrevoLead({
+      email,
+      firstname,
+      lastname: "",
+      phone,
+      message: "Demande de rappel rapide (assurance emprunteur)",
+      source,
+    });
+  } catch (error) {
+    console.error("Erreur envoi lead Brevo", error);
+    return {
+      status: "error",
+      message:
+        "Une erreur technique est survenue. Merci de nous appeler directement au 01 64 24 83 45.",
+    };
+  }
+
+  return {
+    status: "success",
+    message: "Merci ! Un conseiller vous rappelle au plus vite.",
+  };
+}
